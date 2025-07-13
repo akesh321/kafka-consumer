@@ -1,0 +1,71 @@
+from kafka import KafkaProducer
+
+producer = KafkaProducer(bootstrap_servers='localhost:9092')
+producer.send('test-topic', b'Trigger Jenkins')
+producer.flush()
+
+
+from kafka import KafkaConsumer
+import os
+
+consumer = KafkaConsumer('test-topic', bootstrap_servers='localhost:9092')
+
+for message in consumer:
+    print(f"Received: {message.value}")
+    # Trigger Jenkins job
+    os.system("curl -X POST http://localhost:8080/job/my-job/build --user your_user:your_token")
+
+
+pip install kafka-python
+
+
+java -jar jenkins-cli.jar -s http://localhost:8080/ \
+    -auth your_user:your_token build my-job
+python3 consumer.py
+
+python3 producer.py
+
+
+<?xml version='1.1' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>Simple job triggered by Kafka</description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.scm.NullSCM"/>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>echo "Jenkins job triggered by Kafka consumer"</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>
+
+
+java -jar jenkins-cli.jar -s http://localhost:8080/ \
+  -auth your_user:your_token \
+  create-job kafka-trigger-job < job-config.xml
+
+
+<flow-definition plugin="workflow-job">
+  <description>Kafka-triggered pipeline</description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps">
+    <script>
+      pipeline {
+        agent any
+        stages {
+          stage('Kafka Triggered') {
+            steps {
+              echo 'Kafka triggered this pipeline'
+            }
+          }
+        }
+      }
+    </script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+</flow-definition>
