@@ -69,3 +69,16 @@ java -jar jenkins-cli.jar -s http://localhost:8080/ \
   </definition>
   <triggers/>
 </flow-definition>
+
+ps aux | grep jenkins
+
+-DJENKINS_HOME=/custom/path/jenkins_home
+
+cat /etc/default/jenkins | grep JENKINS_HOME
+
+sudo nano /etc/default/jenkins
+
+JENKINS_HOME="/your/custom/path"
+
+sudo systemctl restart jenkins
+
