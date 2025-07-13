@@ -70,6 +70,7 @@ java -jar jenkins-cli.jar -s http://localhost:8080/ \
   <triggers/>
 </flow-definition>
 
+ git url: 'https://github.com/your-username/kafka-project.git', branch: 'main'
 ps aux | grep jenkins
 
 -DJENKINS_HOME=/custom/path/jenkins_home
