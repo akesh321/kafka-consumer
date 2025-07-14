@@ -3,7 +3,7 @@ Preview
 & Code 55% faster with GitHub Copilot
 2
 3
-4
+4export compose_docker_cli _build =1
 5
 6
 $ docker run ‹image_name>
