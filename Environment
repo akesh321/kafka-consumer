@@ -1,0 +1,19 @@
+java -jar /usr/local/bin/jenkins-cli.jar \
+  -s "$JENKINS_URL" \
+  -auth "$JENKINS_USER_ID:$JENKINS_API_TOKEN" \
+  create-job ping < /home/ubuntu/2016460-jenkins-cli-setup-and-job-creation/ping-job.xml
+
+java -jar /usr/local/bin/jenkins-cli.jar \
+  -s "$JENKINS_URL" \
+  -auth "$JENKINS_USER_ID:$JENKINS_API_TOKEN" \
+  build ping -S
+
+source ~/.bashrc  # or `source ~/.zshrc` depending on your shell
+
+Step 2: Set Environment Variables
+
+Add the following to your shell session (~/.bashrc, ~/.zshrc, or execute directly for temporary session):
+
+export JENKINS_URL="http://localhost:8080"
+export JENKINS_USER_ID="admin"
+export JENKINS_API_TOKEN=$(cat /var/lib/jenkins/secrets/initialAdminPassword) ok
