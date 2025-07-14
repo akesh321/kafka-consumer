@@ -5,7 +5,7 @@ Preview
 3
 4export compose_docker_cli _build =1
 5
-6
+6 volume add docker run -v $(pwd):/app -it image
 $ docker run ‹image_name>
 To give name of container
 $ docker run --name ‹ container name> ‹image_name>
