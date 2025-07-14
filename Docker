@@ -1,0 +1,30 @@
+Edit
+Preview
+& Code 55% faster with GitHub Copilot
+2
+3
+4
+5
+6
+$ docker run ‹image_name>
+To give name of container
+$ docker run --name ‹ container name> ‹image_name>
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+export DOCKER_BUILDKIT=0
+docker build -t getting-started-app
+docker pull < image_name>
+$ docker rm {options} ‹ container_name or ID>
+docker exec (options}
+docker run -d -p ‹port_on_host>
+‹ port_on container› Container_name
+docker build -t image_name:tag
